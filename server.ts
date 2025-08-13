@@ -1,5 +1,5 @@
 import express from 'express';
-import { processRoomStrings } from './regex.ts';
+import { processRoomStrings } from './regex.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 

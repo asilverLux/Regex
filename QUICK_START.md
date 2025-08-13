@@ -7,6 +7,7 @@
 1. **Web API** that accepts POST requests with `supplierroom` and `eps_room`
 2. **Web Interface** for easy testing
 3. **Multiple deployment options** ready to go
+4. **Production build** configured for Railway
 
 ### 🏃‍♂️ Immediate Testing
 
@@ -52,36 +53,35 @@
 }
 ```
 
-### 🌐 Deploy to Production
+### 🌐 Deploy to Railway (Fixed!)
 
-**Option 1: Heroku (Recommended for beginners)**
+**Step 1: Build the project**
 ```bash
-heroku create your-app-name
-git add .
-git commit -m "Deploy room matching service"
-git push heroku main
+npm run build
 ```
 
-**Option 2: Railway**
-- Go to [railway.app](https://railway.app)
-- Connect your GitHub repo
-- Deploy automatically
+**Step 2: Deploy to Railway**
+1. Go to [railway.app](https://railway.app)
+2. Sign up with GitHub (free)
+3. Click "New Project" → "Deploy from GitHub repo"
+4. Select your repository
+5. Railway will automatically:
+   - Install dependencies
+   - Run `npm run build`
+   - Start with `npm start`
 
-**Option 3: Render**
-- Go to [render.com](https://render.com)
-- Create Web Service
-- Connect your repo
+**Free tier:** $5 credit monthly (enough for small apps)
 
 ### 🔧 Environment Variables
 
-- `PORT`: Server port (default: 3000)
+- `PORT`: Server port (Railway sets this automatically)
 - `NODE_ENV`: Environment (development/production)
 
 ### 📱 Integration Examples
 
 **JavaScript/Fetch:**
 ```javascript
-const response = await fetch('https://your-app.herokuapp.com/compare-rooms', {
+const response = await fetch('https://your-app.railway.app/compare-rooms', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -96,7 +96,7 @@ const result = await response.json();
 ```python
 import requests
 
-response = requests.post('https://your-app.herokuapp.com/compare-rooms', json={
+response = requests.post('https://your-app.railway.app/compare-rooms', json={
     'supplierroom': 'deluxe room, 1 king bed',
     'eps_room': 'deluxe room, king'
 })
@@ -105,16 +105,16 @@ result = response.json()
 
 **cURL:**
 ```bash
-curl -X POST https://your-app.herokuapp.com/compare-rooms \
+curl -X POST https://your-app.railway.app/compare-rooms \
   -H "Content-Type: application/json" \
   -d '{"supplierroom": "deluxe room, 1 king bed", "eps_room": "deluxe room, king"}'
 ```
 
 ### 🎯 Next Steps
 
-1. **Test locally** with `npm start`
-2. **Choose deployment platform** (Heroku recommended)
-3. **Deploy** following the deployment guide
+1. **Build locally:** `npm run build`
+2. **Test locally:** `npm start`
+3. **Deploy to Railway** (follow steps above)
 4. **Integrate** with your existing systems
 5. **Monitor** using the `/health` endpoint
 
@@ -122,9 +122,9 @@ curl -X POST https://your-app.herokuapp.com/compare-rooms \
 
 - Check the full `deploy.md` for detailed deployment steps
 - Use the `/health` endpoint to verify service status
-- Check console logs for any errors
+- Check Railway logs for any errors
 - The web interface at `/` provides easy testing
 
 ---
 
-**Your service is ready to receive POST requests with `supplierroom` and `eps_room` parameters! 🎉**
+**Your service is now properly configured for Railway deployment! 🎉**

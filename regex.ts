@@ -1,3 +1,4 @@
+// @ts-ignore
 import pkg from 'number-to-words';
 const { toWords } = pkg;
 
